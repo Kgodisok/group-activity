@@ -1,37 +1,36 @@
-// Step 1: Grab all the input fields and the elements we want to update
+
 const nameInput = document.getElementById("name");
 const ageInput = document.getElementById("age");
 const subjectInput = document.getElementById("subject");
 const cardName = document.getElementById("card");
-const messageTag = document.getElementById("message");
 
-// Step 2: This function runs every time the user types something
+
 function updateCard() {
-  // Get the current values from the input boxes
   const name = nameInput.value;
   const age = ageInput.value;
   const subject = subjectInput.value;
 
-  // If any field is empty, show a placeholder message and stop here
+  // If any field is empty, show placeholder and stop
   if (!name || !age || !subject) {
-
     cardName.className = "empty";
+    cardName.textContent = "Fill in the fields above to generate your card ↑";
     return;
   }
 
-  // Step 3: Decide the color class based on age
-  if (Number(age) < 18) {
-    cardName.className = "young"; // green text
+  const ageNum = Number(age);
+
+  // Age-based styling
+  if (ageNum < 18) {
+    cardName.className = "young";
   } else {
-    cardName.className = "adult"; // blue text
+    cardName.className = "adult";
   }
 
-  // Step 4: Build the greeting message using a template literal
+  // Update card text
   cardName.textContent =
-    `Hello ${name}! You are ${age} years old. You love ${subject}!`;
+    `Hello ${name}! You are ${ageNum} years old. You love ${subject}!`;
 }
 
-// Step 5: Listen for typing in each input box, and update the card live
 nameInput.addEventListener("input", updateCard);
 ageInput.addEventListener("input", updateCard);
 subjectInput.addEventListener("input", updateCard);
